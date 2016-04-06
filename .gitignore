@@ -1,0 +1,10 @@
+node_modules/
+bower_components/
+sample/
+plugins/
+platforms/
+.idea/
+.git/
+css/
+fonts/
+.DS_Store
