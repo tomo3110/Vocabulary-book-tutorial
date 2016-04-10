@@ -1,0 +1,110 @@
+body {
+  background: #eee;
+  margin: 0px;
+  flex: 1;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: -webkit-column;
+  flex-direction: -moz-column;
+  flex-direction: -ms-column;
+  flex-direction: -o-column;
+  flex-direction: column;
+}
+
+html {
+    height: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+}
+
+.displayFlex {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+.displayFlexFixed {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  position: fixed;
+  width: 100%;
+}
+
+.flex_row {
+  flex-direction: -webkit-row;
+  flex-direction: -moz-row;
+  flex-direction: -ms-row;
+  flex-direction: -o-row;
+  flex-direction: row;
+}
+
+.flex_column {
+  flex-direction: -webkit-column;
+  flex-direction: -moz-column;
+  flex-direction: -ms-column;
+  flex-direction: -o-column;
+  flex-direction: column;
+}
+
+.flex_nowrap {
+  flex-wrap: -webkit-nowrap;
+  flex-wrap: -moz-nowrap;
+  flex-wrap: -ms-nowrap;
+  flex-wrap: -o-nowrap;
+  flex-wrap: nowrap;
+}
+
+.flex_content {
+    flex: 1;
+}
+
+.card {
+  width: auto;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 1rem;
+}
+.card-img {
+  border-radius: 5px 5px 0 0;
+  max-width: 100%;
+  height: auto;
+}
+.card-content {
+  padding: 1rem;
+}
+.card-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+.card-text {
+  color: #777;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.card-link {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding: 20px;
+}
+.card-link a {
+  text-decoration: none;
+  color: #0bd;
+  margin: 0 10px;
+}
+.card-link a:hover {
+  color: #0090aa;
+}

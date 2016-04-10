@@ -32,18 +32,21 @@ class CheckRun {
     }
     getNextWord(){
         // vm.getNextWord1(this.i, this.incrimentCount)
-        const res = vm.getNextWord1(this.i, this.limit)
-        this.word(res());
-        this.view(false);
+        // vm.getNextWord1(this.i, this.limit)
+        //     .then(res => {
+        //         this.word(res);
+        //         this.view(false);
+        //     })
+        //     .then(this.incrimentCount());
+        this.word(vm.getNextWord1(this.i, this.limit));
         this.incrimentCount();
-        // this.word(vm.getNextWord1(this.i, this.limit));
-        // this.view(false);
+        this.view(false);
     }
     checkEndFlag(){
         const result = _.countBy(this.word(), item => (item.flag === true) ? "ok" : "no" );
         // console.dir(_.countBy(this.word, item => (item().flag) ? "ok" : "no" ));
         console.log(JSON.stringify(result));
-        return (this.limit() === result.ok);
+        return (this.limit() <= result.ok);
 
     }
 }

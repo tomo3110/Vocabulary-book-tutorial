@@ -5,7 +5,5 @@ plugins/
 platforms/
 .idea/
 .git/
-css/
 fonts/
 .DS_Store
-.gitconfig

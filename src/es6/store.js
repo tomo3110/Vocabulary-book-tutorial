@@ -250,18 +250,22 @@ let vm = {
         if(typeof num() === Number)return;
         if(typeof limit() === Number)return;
         if(typeof vm.checkList[num()].flag() === Boolean)return;
+        // let def = d || m.deferred();
         try {
-            if(vm.checkList[num()].flag()){
-                //true
-                vm.incrimentCount(num, limit);
-                vm.getNextWord1(num, limit);
-            } else {
-                //false
-                // const def = m.deferred();
-                const resulve = () => {
+            switch (vm.checkList[num()].flag()) {
+                case true: {
+                    vm.incrimentCount(num, limit);
+                    return vm.getNextWord1(num, limit);
+                }
+                case false: {
+                    // let def = m.deferred();
+                    // def.resolve(vm.checkList[num()]);
+                    // return def.promise;
                     return vm.checkList[num()];
-                };
-                return resulve;
+                }
+                default: {
+                    console.error("error");
+                }
             }
         } catch (e) {
             console.error(e.message);
