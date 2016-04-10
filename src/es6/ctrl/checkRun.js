@@ -13,38 +13,33 @@ class CheckRun {
             this.limit(res());
             vm.addCheckAll(JSON.parse(JSON.stringify(_(vm.wordList).shuffle())));
             if(vm.checkList.length === 0) return m.route("/words");
+            if(vm.checkList.length < res()){
+                this.limit(vm.checkList.length - 1);
+            }
             this.getNextWord();
         });
+        return;
     }
     isFlag(){
         this.word().flag(true);
+        return;
     }
     isView(){
         this.view(true);
+        return;
     }
     incrimentCount(){
         vm.incrimentCount(this.i, this.limit);
-        // if(this.i() === this.limit()){
-        //     this.i(0);
-        // } else {
-        //     this.i(this.i() + 1);
-        // }
+        return;
     }
     getNextWord(){
-        // vm.getNextWord1(this.i, this.incrimentCount)
-        const res = vm.getNextWord1(this.i, this.limit)
-        this.word(res());
-        this.view(false);
+        this.word(vm.getNextWord1(this.i, this.limit));
         this.incrimentCount();
-        // this.word(vm.getNextWord1(this.i, this.limit));
-        // this.view(false);
+        this.view(false);
+        return;
     }
     checkEndFlag(){
-        const result = _.countBy(this.word(), item => (item.flag === true) ? "ok" : "no" );
-        // console.dir(_.countBy(this.word, item => (item().flag) ? "ok" : "no" ));
-        console.log(JSON.stringify(result));
-        return (this.limit() === result.ok);
-
+        return vm.checkEndFlag(this.limit);
     }
 }
 
