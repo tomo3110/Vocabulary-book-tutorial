@@ -13,22 +13,30 @@ class CheckRun {
             this.limit(res());
             vm.addCheckAll(JSON.parse(JSON.stringify(_(vm.wordList).shuffle())));
             if(vm.checkList.length === 0) return m.route("/words");
+            if(vm.checkList.length < res()){
+                this.limit(vm.checkList.length - 1);
+            }
             this.getNextWord();
         });
+        return;
     }
     isFlag(){
         this.word().flag(true);
+        return;
     }
     isView(){
         this.view(true);
+        return;
     }
     incrimentCount(){
         vm.incrimentCount(this.i, this.limit);
+        return;
     }
     getNextWord(){
         this.word(vm.getNextWord1(this.i, this.limit));
         this.incrimentCount();
         this.view(false);
+        return;
     }
     checkEndFlag(){
         return vm.checkEndFlag(this.limit);

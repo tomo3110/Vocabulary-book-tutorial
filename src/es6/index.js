@@ -7,6 +7,7 @@ import Home from "./scene/home";
 import Words from "./scene/words";
 import WordsNew from "./scene/wordsNew";
 import WordsEdit from "./scene/WordsEdit";
+import Check from "./scene/Check";
 import CheckRun from "./scene/CheckRun";
 
 import "skeleton";
@@ -155,10 +156,11 @@ const test1 = {
 //     "/test/run": TestRun,
 //     "/test/result": TestResult
 // });
-m.route(document.body, "/check/2", {
+m.route(document.body, "/home", {
     "/home": Home,
     "/words": Words,
     "/words/new": WordsNew,
     "/words/:id": WordsEdit,
-    "/check/:id": CheckRun
+    "/check/:id": CheckRun,
+    "/check": Check
 });

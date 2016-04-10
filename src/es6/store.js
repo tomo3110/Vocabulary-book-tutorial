@@ -50,14 +50,14 @@ let vm = {
                 title: "単語帳",
                 l_btn: {
                     label: "戻る",
-                    act: ()=>{
-                        m.route("/home");
+                    act: () => {
+                        return m.route("/home");
                     }
                 },
                 r_btn: {
                     label: "追加",
-                    act: ()=>{
-                        m.route("/words/new");
+                    act: () => {
+                        return m.route("/words/new");
                     }
                 }
             },
@@ -71,7 +71,7 @@ let vm = {
                 l_btn: {
                     label: "戻る",
                     act: () => {
-                        m.route("/words");
+                        return m.route("/words");
                     }
                 },
                 r_btn: {
@@ -90,7 +90,7 @@ let vm = {
                 l_btn: {
                     label: "戻る",
                     act: () => {
-                        m.route("/words");
+                        return m.route("/words");
                     }
                 },
                 r_btn: {
@@ -108,7 +108,7 @@ let vm = {
                 l_btn: {
                     label: "戻る",
                     act: function(){
-                        m.route("/home");
+                        return m.route("/home");
                     }
                 },
                 r_btn: {
@@ -116,7 +116,28 @@ let vm = {
                     act: function(){}
                 }
             },
-            content: {}
+            content: {
+                select: {
+                    name: "checkLimitSelect",
+                    label: "問題数の選択",
+                    option: [
+                        {
+                            value: 5,
+                            title: "5問"
+                        },{
+                            value: 10,
+                            title: "10問"
+                        },{
+                            value: 15,
+                            title: "15問"
+                        },{
+                            value: 20,
+                            title: "20問"
+                        }
+                    ]
+                },
+                button: "暗記カードへ"
+            }
         },
         checkRun: {
             navbar: {
@@ -124,7 +145,7 @@ let vm = {
                 l_btn: {
                     label: "戻る",
                     act: function(){
-                        m.route("/check");
+                        return m.route("/check");
                     }
                 },
                 r_btn: {
@@ -140,7 +161,7 @@ let vm = {
                 l_btn: {
                     label: "戻る",
                     act: function(){
-                        m.route("/home");
+                        return m.route("/home");
                     }
                 },
                 r_btn: {
@@ -156,7 +177,7 @@ let vm = {
                 l_btn: {
                     label: "戻る",
                     act: function(){
-                        m.route("/test");
+                        return m.route("/test");
                     }
                 },
                 r_btn: {
@@ -172,7 +193,7 @@ let vm = {
                 l_btn: {
                     label: "戻る",
                     act: function(){
-                        m.route("/home");
+                        return m.route("/home");
                     }
                 },
                 r_btn: {
@@ -187,22 +208,25 @@ let vm = {
         vm.wordList = new Words.List();
         vm.checkList = new Check.List();
         // this.addAll(this.list, []);
+        return;
     },
     add: (list, addItem) => {
         if(addItem){
             list.push(new Words.Item(addItem));
-            // console.log("add");
+            return;
         }
     },
     addAll: (list, addList) => {
         addList.map(addItem => vm.add(list, addItem));
-        // console.log("addAll");
+        return;
     },
     addCheck: addItem => {
         vm.checkList.push(new Check.Item(addItem));
+        return;
     },
     addCheckAll: addList => {
         addList.map(addItem => vm.addCheck(addItem));
+        return;
     },
     getUrlParam: key => {
         const deferred = m.deferred();
@@ -218,8 +242,10 @@ let vm = {
     incrimentCount: (num, limit) =>{
         if(num() === limit()){
             num(0);
+            return;
         } else {
             num(num() + 1);
+            return;
         }
     },
     /**
@@ -227,24 +253,6 @@ let vm = {
     *@param{Function}incrimentFunc 配列インデックスのインクリメントを行う関数
     *@param{Function}d m.deferredで作成したpromiseファクトリー
     */
-    getNextWord: (num, incrimentFunc, d) => {
-        const def = d || m.deferred();
-        if(typeof num() === Number)return;
-        try {
-            if(!vm.checkList[num()].flag()){
-                def.resolve(() => {
-                    return vm.checkList[num()];
-                });
-                return def.promise;
-            } else if (vm.checkList[num()].flag()) {
-                // console.log(num++);
-                incrimentFunc();
-                vm.getNextWord(num, incrimentFunc, def);
-            }
-        } catch (e) {
-            console.error(e.message);
-        }
-    },
     getNextWord1: (num, limit) => {
         //引数の型チェック
         if(typeof num() === Number)return;
@@ -259,9 +267,6 @@ let vm = {
                 case false: {
                     return vm.checkList[num()];
                 }
-                default: {
-                    console.error("error");
-                }
             }
         } catch (e) {
             console.error(e.message);
@@ -269,11 +274,9 @@ let vm = {
     },
     checkEndFlag: limit => {
         const result = _.countBy(vm.checkList, item => {
-            console.log(JSON.stringify(item));
             return (item.flag() === true) ? "ok" : "no";
         });
-        console.log(JSON.stringify(result));
-        return (limit() <= result.ok);
+        return (limit() + 1 === result.ok);
     }
 };
 

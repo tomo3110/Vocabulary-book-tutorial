@@ -13,8 +13,8 @@ const homeMenuItem = item => {
     },[
         m("button", {
             "class": "u-full-width",
-            "onclick": () =>{
-                m.route(item.url)
+            "onclick": () => {
+                m.route(item.url);
             }
         }, item.label),
         m("ul", {
@@ -29,7 +29,7 @@ const homeMenuItem = item => {
 };
 
 const homeMenu = list => {
-    return m(".displayFlex flex_column", {
+    return m("div", {
         "style": {
             "flex": "1"
         }

@@ -7,3 +7,4 @@ platforms/
 .git/
 fonts/
 .DS_Store
+npm-debug.log
