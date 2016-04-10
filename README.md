@@ -19,22 +19,18 @@ $ npm i -g webpack && cordova
 $ cd ./Vocabulary-book-tutorial
 $ npm i
 ```
-
 3. running app
 ```bash
 $ npm start
 ```
 
-### 機能
-- #### 単語帳:
-  - 単語の追加
-  - 単語の修正
-- #### 暗記帳:
-  - mikan likeに単語を覚える。
-- #### テスト:
-  - 暗記帳でわかると答えた単語を問題として、暗記できているかを測る。
+## 機能
+- 単語帳:
+- 暗記帳:
+- テスト:
 
-### 課題
+
+## 課題
 - 幾つかの機能が未だ未実装
   - test機能
   - 端末DB
