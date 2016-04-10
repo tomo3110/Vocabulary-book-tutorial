@@ -24,30 +24,14 @@ class CheckRun {
     }
     incrimentCount(){
         vm.incrimentCount(this.i, this.limit);
-        // if(this.i() === this.limit()){
-        //     this.i(0);
-        // } else {
-        //     this.i(this.i() + 1);
-        // }
     }
     getNextWord(){
-        // vm.getNextWord1(this.i, this.incrimentCount)
-        // vm.getNextWord1(this.i, this.limit)
-        //     .then(res => {
-        //         this.word(res);
-        //         this.view(false);
-        //     })
-        //     .then(this.incrimentCount());
         this.word(vm.getNextWord1(this.i, this.limit));
         this.incrimentCount();
         this.view(false);
     }
     checkEndFlag(){
-        const result = _.countBy(this.word(), item => (item.flag === true) ? "ok" : "no" );
-        // console.dir(_.countBy(this.word, item => (item().flag) ? "ok" : "no" ));
-        console.log(JSON.stringify(result));
-        return (this.limit() <= result.ok);
-
+        return vm.checkEndFlag(this.limit);
     }
 }
 

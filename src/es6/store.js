@@ -250,7 +250,6 @@ let vm = {
         if(typeof num() === Number)return;
         if(typeof limit() === Number)return;
         if(typeof vm.checkList[num()].flag() === Boolean)return;
-        // let def = d || m.deferred();
         try {
             switch (vm.checkList[num()].flag()) {
                 case true: {
@@ -258,9 +257,6 @@ let vm = {
                     return vm.getNextWord1(num, limit);
                 }
                 case false: {
-                    // let def = m.deferred();
-                    // def.resolve(vm.checkList[num()]);
-                    // return def.promise;
                     return vm.checkList[num()];
                 }
                 default: {
@@ -270,6 +266,14 @@ let vm = {
         } catch (e) {
             console.error(e.message);
         }
+    },
+    checkEndFlag: limit => {
+        const result = _.countBy(vm.checkList, item => {
+            console.log(JSON.stringify(item));
+            return (item.flag() === true) ? "ok" : "no";
+        });
+        console.log(JSON.stringify(result));
+        return (limit() <= result.ok);
     }
 };
 

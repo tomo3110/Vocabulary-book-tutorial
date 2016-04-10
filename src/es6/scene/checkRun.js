@@ -32,8 +32,9 @@ let CheckRun = {
                             ctrl.isFlag();
                             if(ctrl.checkEndFlag()){
                                 m.route("/home");
+                            } else {
+                                ctrl.getNextWord();
                             }
-                            ctrl.getNextWord();
                         },
                         label: "わかる"
                     },
