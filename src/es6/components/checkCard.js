@@ -8,20 +8,18 @@ const checkCard = args => {
             "margin-bottom": "1rem",
             "align-items": "center"
         },
-        "config": (element, isInit/*, context*/) => {
+        "config": (element, isInit) => {
+            const hammer = new Hammer(element);
             try {
                 if(isInit)return;
-                const hammer = new Hammer(element);
-                hammer.on("swipeleft", () => args.l_act());
+                hammer.on("swipeleft", () => args.l_act(element));
                 hammer.on("swiperight", () => args.r_act());
                 hammer.on("tap", () => args.t_act());
+                return;
             } catch(e) {
                 console.log(e);
+                throw new Error("hammerJs swaip & tap events undefined");
             }
-            return;
-            // context.onunload = () => {
-            //     hammer.
-            // };
         }
     }, [
         m(".flex_content", [

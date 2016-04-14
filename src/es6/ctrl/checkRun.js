@@ -1,6 +1,7 @@
 import * as m from "mithril";
 import vm from "../store";
 import _ from "underscore";
+import Check from "../model/check";
 
 class CheckRun {
     constructor(){
@@ -40,6 +41,10 @@ class CheckRun {
     }
     checkEndFlag(){
         return vm.checkEndFlag(this.limit);
+    }
+    onunload(){
+        vm.checkList = undefined;
+        vm.checkList = new Check.List();
     }
 }
 

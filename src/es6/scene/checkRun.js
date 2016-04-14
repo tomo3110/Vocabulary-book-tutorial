@@ -28,9 +28,14 @@ let CheckRun = {
                         m.endComputation();
                         return;
                     },
-                    l_act: () => {
+                    l_act: (element) => {
+                        // const el = element.classList;
                         m.startComputation();
                         ctrl.getNextWord();
+                        console.log(element);
+                        // el.add("animated");
+                        // el.add("infinite");
+                        // el.add("bounce");
                         m.endComputation();
                         return;
                     },

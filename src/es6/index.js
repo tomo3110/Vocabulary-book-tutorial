@@ -11,6 +11,7 @@ import Check from "./scene/Check";
 import CheckRun from "./scene/CheckRun";
 
 import "skeleton";
+import "animate.css";
 import "../css/style.css";
 
 class Ctrl {
@@ -23,12 +24,15 @@ store.init();
 // console.log(store.wordList.length);
 store.addAll(store.wordList, [
     {
+        index: 0,
         en: "hello",
         ja: "こんにちは"
     },{
+        index: 1,
         en: "Apple",
         ja: "りんご"
     },{
+        index: 2,
         en: "window",
         ja: "窓"
     }
