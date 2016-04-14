@@ -1,4 +1,5 @@
 import m from "mithril";
+import Hammer from "hammerjs";
 
 const checkCard = args => {
     return m(".card displayFlex", {
@@ -7,8 +8,20 @@ const checkCard = args => {
             "margin-bottom": "1rem",
             "align-items": "center"
         },
-        "onclick": () => {
-            args.act()
+        "config": (element, isInit/*, context*/) => {
+            try {
+                if(isInit)return;
+                const hammer = new Hammer(element);
+                hammer.on("swipeleft", () => args.l_act());
+                hammer.on("swiperight", () => args.r_act());
+                hammer.on("tap", () => args.t_act());
+            } catch(e) {
+                console.log(e);
+            }
+            return;
+            // context.onunload = () => {
+            //     hammer.
+            // };
         }
     }, [
         m(".flex_content", [

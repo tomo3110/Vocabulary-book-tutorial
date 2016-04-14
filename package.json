@@ -22,7 +22,9 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
+    "hammerjs": "^2.0.6",
     "mithril": "^0.2.3",
+    "quojs": "^3.0.8",
     "underscore": "^1.8.3"
   }
 }

@@ -232,7 +232,7 @@ let vm = {
         const deferred = m.deferred();
         deferred.resolve(() => {
             let res = Number(m.route.param(key));
-            return res - 1;
+            return res;
         });
         return deferred.promise;
     },

@@ -21,7 +21,31 @@ let CheckRun = {
                     en: ctrl.word().en,
                     ja: ctrl.word().ja,
                     flex: "4",
-                    act: ctrl.isView,
+                    t_act: () => {
+                        if(ctrl.view())return;
+                        m.startComputation();
+                        ctrl.isView();
+                        m.endComputation();
+                        return;
+                    },
+                    l_act: () => {
+                        m.startComputation();
+                        ctrl.getNextWord();
+                        m.endComputation();
+                        return;
+                    },
+                    r_act: () => {
+                        m.startComputation();
+                        ctrl.isFlag();
+                        if(ctrl.checkEndFlag()){
+                            m.route("/home");
+                            m.endComputation();
+                        } else {
+                            ctrl.getNextWord();
+                            m.endComputation();
+                        }
+                        return;
+                    },
                     view: ctrl.view
                 }),
                 m("hr"),
@@ -32,8 +56,10 @@ let CheckRun = {
                             ctrl.isFlag();
                             if(ctrl.checkEndFlag()){
                                 m.route("/home");
+                                return;
                             } else {
                                 ctrl.getNextWord();
+                                return
                             }
                         },
                         label: "わかる"

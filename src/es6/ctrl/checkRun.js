@@ -10,7 +10,7 @@ class CheckRun {
         this.limit = m.prop(0);
         this.navbar = vm.scene.checkRun.navbar;
         vm.getUrlParam("id").then(res => {
-            this.limit(res());
+            this.limit(res() - 1);
             vm.addCheckAll(JSON.parse(JSON.stringify(_(vm.wordList).shuffle())));
             if(vm.checkList.length === 0) return m.route("/words");
             if(vm.checkList.length < res()){
