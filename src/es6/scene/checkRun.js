@@ -20,59 +20,22 @@ let CheckRun = {
                 checkCard({
                     en: ctrl.word().en,
                     ja: ctrl.word().ja,
+                    isAnimation: ctrl.animationFlag,
                     flex: "4",
-                    t_act: () => {
-                        if(ctrl.view())return;
-                        m.startComputation();
-                        ctrl.isView();
-                        m.endComputation();
-                        return;
-                    },
-                    l_act: (element) => {
-                        // const el = element.classList;
-                        m.startComputation();
-                        ctrl.getNextWord();
-                        console.log(element);
-                        // el.add("animated");
-                        // el.add("infinite");
-                        // el.add("bounce");
-                        m.endComputation();
-                        return;
-                    },
-                    r_act: () => {
-                        m.startComputation();
-                        ctrl.isFlag();
-                        if(ctrl.checkEndFlag()){
-                            m.route("/home");
-                            m.endComputation();
-                        } else {
-                            ctrl.getNextWord();
-                            m.endComputation();
-                        }
-                        return;
-                    },
+                    t_act: () => ctrl.t_act(),
+                    l_act: () => ctrl.l_act(),
+                    r_act: () => ctrl.r_act(),
                     view: ctrl.view
                 }),
                 m("hr"),
                 checkButtons({
                     flex: "1",
                     r: {
-                        action: () => {
-                            ctrl.isFlag();
-                            if(ctrl.checkEndFlag()){
-                                m.route("/home");
-                                return;
-                            } else {
-                                ctrl.getNextWord();
-                                return
-                            }
-                        },
+                        action: () => ctrl.r_act(),
                         label: "わかる"
                     },
                     l: {
-                        action: () => {
-                            ctrl.getNextWord();
-                        },
+                        action: () => ctrl.l_act(),
                         label: "わからない"
                     }
                 })

@@ -2,6 +2,7 @@ import m from "mithril";
 import _ from "underscore";
 import Words from "./model/words";
 import Check from "./model/check";
+// import DB from "./helper/db";
 
 let vm = {
     scene: {
@@ -207,7 +208,31 @@ let vm = {
     init: () => {
         vm.wordList = new Words.List();
         vm.checkList = new Check.List();
-        // this.addAll(this.list, []);
+        vm.addAll(vm.wordList, [
+            {
+                rowid: 0,
+                en: "hello",
+                ja: "こんにちは"
+            },{
+                rowid: 1,
+                en: "Apple",
+                ja: "りんご"
+            },{
+                rowid: 2,
+                en: "window",
+                ja: "窓"
+            }
+        ]);
+        // vm.db = new DB("vocablary_book");
+        // vm.db.createTable({
+        //     name: "words",
+        //     colomes: [
+        //         "en",
+        //         "ja",
+        //         "flag"
+        //     ]
+        // });
+        // vm.featch({name: "words"});
         return;
     },
     add: (list, addItem) => {
@@ -257,14 +282,14 @@ let vm = {
         //引数の型チェック
         if(typeof num() === Number)return;
         if(typeof limit() === Number)return;
-        if(typeof vm.checkList[num()].flag() === Boolean)return;
+        if(typeof vm.checkList[num()].flag() === Number)return;
         try {
             switch (vm.checkList[num()].flag()) {
-                case true: {
+                case 1: {
                     vm.incrimentCount(num, limit);
                     return vm.getNextWord1(num, limit);
                 }
-                case false: {
+                case 0: {
                     return vm.checkList[num()];
                 }
             }
@@ -274,10 +299,18 @@ let vm = {
     },
     checkEndFlag: limit => {
         const result = _.countBy(vm.checkList, item => {
-            return (item.flag() === true) ? "ok" : "no";
+            return (item.flag() === 1) ? "ok" : "no";
         });
         return (limit() + 1 === result.ok);
-    }
+    },
+    // featch(args){
+    //     vm.db.select({
+    //         name: args.name,
+    //         where: args.where
+    //     }).then(res => {
+    //         vm.addAll(vm.wordList, res);
+    //     });
+    // }
 };
 
 export default vm;

@@ -3,6 +3,7 @@ import Hammer from "hammerjs";
 
 const checkCard = args => {
     return m(".card displayFlex", {
+        // "class": args.isAnimation() ? "animated fadeOutRight" : "",
         "style": {
             "flex": args.flex,
             "margin-bottom": "1rem",
@@ -13,7 +14,7 @@ const checkCard = args => {
             try {
                 if(isInit)return;
                 hammer.on("swipeleft", () => args.l_act(element));
-                hammer.on("swiperight", () => args.r_act());
+                hammer.on("swiperight", () => args.r_act(element));
                 hammer.on("tap", () => args.t_act());
                 return;
             } catch(e) {

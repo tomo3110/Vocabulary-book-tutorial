@@ -14,7 +14,15 @@ class WordsNew {
         vm.add(vm.wordList, {
             en: this.en(),
             ja: this.ja()
-        });
+        })
+        // vm.db.insert({
+        //     name: "words",
+        //     data: {
+        //         en: "'" + this.en() + "'",
+        //         ja: "'" + this.ja() + "'",
+        //         flag: 0
+        //     }
+        // });
         this.en("");
         this.ja("");
         if(!continu){
