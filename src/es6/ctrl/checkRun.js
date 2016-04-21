@@ -1,6 +1,6 @@
 import * as m from "mithril";
 import vm from "../store";
-// import _ from "underscore";
+import _ from "underscore";
 import Check from "../model/check";
 // import window from "window";
 
@@ -14,32 +14,19 @@ class CheckRun {
         this.navbar = vm.scene.checkRun.navbar;
         vm.getUrlParam("id").then(res => {
             this.limit(res() - 1);
-            vm.addCheckAll(JSON.parse(JSON.stringify(_(vm.wordList).shuffle())));
-            // vm.db.select({
-            //     name: "words"
-            //     // where: "flag = 'flase'"
-            // }).then(data => {
-            //     m.startComputation();
-            //     console.log(data);
-            //     vm.addCheckAll(data);
-            //     if(vm.checkList.length === 0) return m.route("/words");
-            //     if(vm.checkList.length < res()){
-            //         this.limit(vm.checkList.length - 1);
-            //     }
-            //     this.getNextWord();
-            //     m.endComputation();
-            //     return;
-            // });
-            if(vm.checkList.length === 0) return m.route("/words");
-            if(vm.checkList.length < res()){
-                this.limit(vm.checkList.length - 1);
-            }
-            this.getNextWord();
-            return;
+            vm.strage.words.get().then(data => {
+                vm.addCheckAll(_(data).shuffle());
+                if(vm.checkList.length === 0) return m.route("/words");
+                if(vm.checkList.length < res()){
+                    this.limit(vm.checkList.length - 1);
+                }
+                this.getNextWord();
+                return;
+            });
         });
     }
     isFlag(){
-        this.word().flag(1);
+        this.word().flag(true);
         return;
     }
     isView(){
@@ -84,6 +71,7 @@ class CheckRun {
         return;
     }
     onunload(){
+        vm.strage.words.set(this.checkList);
         vm.checkList = undefined;
         vm.checkList = new Check.List();
     }

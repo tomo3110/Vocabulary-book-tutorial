@@ -7,8 +7,6 @@
     "/src/es6/**/*.js"
   ],
   "dontLoad": [
-    "/node_modules/**/*.js",
-    "/bower_components/**/*.js",
     "/sample/**/*.js",
     "/webpack.config.js"
   ],

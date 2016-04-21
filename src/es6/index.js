@@ -21,6 +21,12 @@ class Ctrl {
     }
 }
 document.addEventListener("deviceready", store.init, false);
+// store.strage.set([
+//     {rowid: 0, en: "hello", ja: "こんにちは"},
+//     {rowid: 1, en: "Apple", ja: "りんご"},
+//     {rowid: 2, en: "window", ja: "窓"}
+// ]);
+// store.addAll(store.wordList, store.strage.get());
 // store.featch();
 // store.init();
 // console.log(store.wordList.length);
@@ -63,7 +69,7 @@ const test = new Test();
 // console.log(JSON.stringify(test.word()));
 // test.isFlag();
 // test.getNextWord();
-console.log(JSON.stringify(test.word()));
+// console.log(JSON.stringify(test.word()));
 // console.log(store.wordList.length);
 // console.log(JSON.stringify(store.wordList));
 

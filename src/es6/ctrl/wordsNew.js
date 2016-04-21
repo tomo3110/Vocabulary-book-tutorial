@@ -29,6 +29,9 @@ class WordsNew {
             m.route("/words");
         }
     }
+    onunload(){
+        vm.strage.words.set(vm.wordList);
+    }
 }
 
 export default WordsNew;
