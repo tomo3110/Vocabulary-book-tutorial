@@ -3,6 +3,7 @@ import vm from "../store";
 
 class Check {
     constructor(){
+        // vm.reload();
         this.navbar = vm.scene.check.navbar;
         this.content = vm.scene.check.content;
         this.checkLimit = m.prop(5);

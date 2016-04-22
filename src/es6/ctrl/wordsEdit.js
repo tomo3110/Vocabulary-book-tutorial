@@ -9,8 +9,10 @@ class WordsEdit {
                 // console.log("param:" + res() + " data:" + vm.wordList[res()]);
                 this.navbar = vm.scene.wordsEdit.navbar;
                 this.button = vm.scene.wordsEdit.content.button;
+                // this.index = m.prop(vm.wordList[res()].rowid());
                 this.en = m.prop(vm.wordList[res()].en());
                 this.ja = m.prop(vm.wordList[res()].ja());
+                // this.flag = m.prop(vm.wordList[res()].flag());
             });
     }
     add(){
@@ -20,6 +22,9 @@ class WordsEdit {
         this.en("");
         this.ja("");
         m.route("/words");
+    }
+    onunload(){
+        vm.strage.words.set(vm.wordList);
     }
 }
 

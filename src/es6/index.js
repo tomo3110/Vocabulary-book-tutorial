@@ -1,7 +1,8 @@
 import m from "mithril";
 import navbar from "./components/navbar";
 import store from "./store";
-import Test from "././ctrl/checkRun";
+import Test from "./ctrl/checkRun";
+// import Cmd from "./helper/mySqlite";
 
 import Home from "./scene/home";
 import Words from "./scene/words";
@@ -11,6 +12,7 @@ import Check from "./scene/Check";
 import CheckRun from "./scene/CheckRun";
 
 import "skeleton";
+import "animate.css";
 import "../css/style.css";
 
 class Ctrl {
@@ -18,27 +20,56 @@ class Ctrl {
         this.name = m.prop(name);
     }
 }
-
-store.init();
+document.addEventListener("deviceready", store.init, false);
+// store.strage.set([
+//     {rowid: 0, en: "hello", ja: "こんにちは"},
+//     {rowid: 1, en: "Apple", ja: "りんご"},
+//     {rowid: 2, en: "window", ja: "窓"}
+// ]);
+// store.addAll(store.wordList, store.strage.get());
+// store.featch();
+// store.init();
 // console.log(store.wordList.length);
-store.addAll(store.wordList, [
-    {
-        en: "hello",
-        ja: "こんにちは"
-    },{
-        en: "Apple",
-        ja: "りんご"
-    },{
-        en: "window",
-        ja: "窓"
-    }
-]);
+// store.addAll(store.wordList, [
+//     {
+//         index: 0,
+//         en: "hello",
+//         ja: "こんにちは"
+//     },{
+//         index: 1,
+//         en: "Apple",
+//         ja: "りんご"
+//     },{
+//         index: 2,
+//         en: "window",
+//         ja: "窓"
+//     }
+// ]);
+
+// const cmd = new Cmd();
+//
+// console.log(cmd.select({
+//     name: "test"
+//     // where: "flag = " + true
+//     // data: [
+//     //     {
+//     //         colome: "id",
+//     //         value: 1
+//     //     },{
+//     //         colome: "name",
+//     //         value: "'saitou'"
+//     //     },{
+//     //         colome: "age",
+//     //         value: "'22'"
+//     //     }
+//     // ]
+// }));
 
 const test = new Test();
 // console.log(JSON.stringify(test.word()));
 // test.isFlag();
 // test.getNextWord();
-console.log(JSON.stringify(test.word()));
+// console.log(JSON.stringify(test.word()));
 // console.log(store.wordList.length);
 // console.log(JSON.stringify(store.wordList));
 

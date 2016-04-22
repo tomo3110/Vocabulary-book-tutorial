@@ -20,28 +20,22 @@ let CheckRun = {
                 checkCard({
                     en: ctrl.word().en,
                     ja: ctrl.word().ja,
+                    isAnimation: ctrl.animationFlag,
                     flex: "4",
-                    act: ctrl.isView,
+                    t_act: () => ctrl.t_act(),
+                    l_act: () => ctrl.l_act(),
+                    r_act: () => ctrl.r_act(),
                     view: ctrl.view
                 }),
                 m("hr"),
                 checkButtons({
                     flex: "1",
                     r: {
-                        action: () => {
-                            ctrl.isFlag();
-                            if(ctrl.checkEndFlag()){
-                                m.route("/home");
-                            } else {
-                                ctrl.getNextWord();
-                            }
-                        },
+                        action: () => ctrl.r_act(),
                         label: "わかる"
                     },
                     l: {
-                        action: () => {
-                            ctrl.getNextWord();
-                        },
+                        action: () => ctrl.l_act(),
                         label: "わからない"
                     }
                 })

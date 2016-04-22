@@ -2,7 +2,8 @@ import m from "mithril";
 import _ from "underscore";
 import Words from "./model/words";
 import Check from "./model/check";
-
+import LS from "./helper/stgrage";
+// import DB from "./helper/db";
 let vm = {
     scene: {
         home: {
@@ -207,21 +208,36 @@ let vm = {
     init: () => {
         vm.wordList = new Words.List();
         vm.checkList = new Check.List();
-        // this.addAll(this.list, []);
+        vm.strage = {
+            words: new LS("words")
+        };
+        vm.strage.words.set([
+            {rowid: 0, en: "hello", ja: "こんにちは"},
+            {rowid: 1, en: "Apple", ja: "りんご"},
+            {rowid: 2, en: "window", ja: "窓"}
+        ]);
+        vm.strage.words.get().then(res => {
+            if(res){
+                vm.addAll(vm.wordList, res);
+            }
+        });
         return;
     },
-    add: (list, addItem) => {
+    add: (list = [], addItem) => {
         if(addItem){
             list.push(new Words.Item(addItem));
             return;
         }
     },
-    addAll: (list, addList) => {
+    addAll: (list = [], addList) => {
         addList.map(addItem => vm.add(list, addItem));
         return;
     },
     addCheck: addItem => {
-        vm.checkList.push(new Check.Item(addItem));
+        if(addItem){
+            vm.checkList.push(new Check.Item(addItem));
+
+        }
         return;
     },
     addCheckAll: addList => {
@@ -232,7 +248,7 @@ let vm = {
         const deferred = m.deferred();
         deferred.resolve(() => {
             let res = Number(m.route.param(key));
-            return res - 1;
+            return res;
         });
         return deferred.promise;
     },
@@ -249,9 +265,9 @@ let vm = {
         }
     },
     /**
-    *@param{Function}num 配列インデックス、m.prop(0)で作成したgetter-setter関数
-    *@param{Function}incrimentFunc 配列インデックスのインクリメントを行う関数
-    *@param{Function}d m.deferredで作成したpromiseファクトリー
+    * getNextWord1
+    * @param{Function} [num] 配列インデックス、m.prop(0)で作成したgetter-setter関数
+    * @param{Function} [limit] 配列インデックスのインクリメントを行う関数
     */
     getNextWord1: (num, limit) => {
         //引数の型チェック
@@ -269,14 +285,33 @@ let vm = {
                 }
             }
         } catch (e) {
-            console.error(e.message);
+            // console.error(e.message);
+            return;
         }
     },
     checkEndFlag: limit => {
         const result = _.countBy(vm.checkList, item => {
-            return (item.flag() === true) ? "ok" : "no";
+            return item.flag() ? "ok" : "no";
         });
         return (limit() + 1 === result.ok);
+    },
+    // featch(args){
+    //     vm.db.select({
+    //         name: args.name,
+    //         where: args.where
+    //     }).then(res => {
+    //         vm.addAll(vm.wordList, res);
+    //     });
+    // }
+    save: (data) => {
+        vm.strage.set(data);
+    },
+    fetch: (key) => {
+        vm.strage.key(key || "words");
+        return vm.strage.get();
+    },
+    reload: () => {
+        vm.addAll(vm.wordList, vm.strage.get());
     }
 };
 
