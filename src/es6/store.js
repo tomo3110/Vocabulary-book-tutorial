@@ -208,14 +208,7 @@ let vm = {
     init: () => {
         vm.wordList = new Words.List();
         vm.checkList = new Check.List();
-        vm.strage = {
-            words: new LS("words")
-        };
-        vm.strage.words.set([
-            {rowid: 0, en: "hello", ja: "こんにちは"},
-            {rowid: 1, en: "Apple", ja: "りんご"},
-            {rowid: 2, en: "window", ja: "窓"}
-        ]);
+        vm.rejectList = new Words.List();
         vm.strage.words.get().then(res => {
             if(res){
                 vm.addAll(vm.wordList, res);
@@ -295,14 +288,6 @@ let vm = {
         });
         return (limit() + 1 === result.ok);
     },
-    // featch(args){
-    //     vm.db.select({
-    //         name: args.name,
-    //         where: args.where
-    //     }).then(res => {
-    //         vm.addAll(vm.wordList, res);
-    //     });
-    // }
     save: (data) => {
         vm.strage.set(data);
     },
@@ -311,7 +296,14 @@ let vm = {
         return vm.strage.get();
     },
     reload: () => {
-        vm.addAll(vm.wordList, vm.strage.get());
+        vm.wordList = undefined;
+        vm.wordList = new Words.List();
+        vm.strage.words.get().then(res => {
+            vm.addAll(vm.wordList, res);
+        });
+    },
+    strage: {
+        words: new LS("words")
     }
 };
 

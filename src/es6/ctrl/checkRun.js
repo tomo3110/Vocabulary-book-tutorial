@@ -15,7 +15,9 @@ class CheckRun {
         vm.getUrlParam("id").then(res => {
             this.limit(res() - 1);
             vm.strage.words.get().then(data => {
-                vm.addCheckAll(_(data).shuffle());
+                const resData = _(data).filter(item => item.flag === false);
+                vm.addCheckAll(_(resData).shuffle());
+                vm.addAll(vm.rejectList, _(data).filter(item => item.flag === true));
                 if(vm.checkList.length === 0) return m.route("/words");
                 if(vm.checkList.length < res()){
                     this.limit(vm.checkList.length - 1);
@@ -71,7 +73,7 @@ class CheckRun {
         return;
     }
     onunload(){
-        vm.strage.words.set(this.checkList);
+        vm.strage.words.set(_.union(vm.checkList, vm.rejectList));
         vm.checkList = undefined;
         vm.checkList = new Check.List();
     }
